@@ -52,3 +52,25 @@ body {
 }
 
 .hidden { display: none; }
+
+/* Fundos Dinâmicos */
+.default-bg {
+    background: linear-gradient(135deg, #00b4db, #0083b0);
+}
+
+.clear-bg {
+    background: linear-gradient(135deg, #ffb347, #ffcc33); /* Amarelo ensolarado */
+}
+
+.clouds-bg {
+    background: linear-gradient(135deg, #bdc3c7, #2c3e50); /* Cinza nublado */
+}
+
+.rain-bg {
+    background: linear-gradient(135deg, #3a7bd5, #3a6073); /* Azul escuro chuvoso */
+}
+
+/* Garante uma transição suave ao mudar de cor */
+body {
+    transition: background 0.5s ease;
+}

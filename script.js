@@ -11,7 +11,6 @@ const humidityElement = document.querySelector("#humidity");
 const windElement = document.querySelector("#wind");
 const weatherContainer = document.querySelector("#weather-info");
 
-// Função para buscar dados da API
 const getWeatherData = async (city) => {
     const apiWeatherURL = `https://openweathermap.org{city}&units=metric&appid=${apiKey}&lang=pt_br`;
 
@@ -19,14 +18,13 @@ const getWeatherData = async (city) => {
     const data = await res.json();
 
     if (data.cod === "404") {
-        alert("Cidade não encontrada. Verifique a ortografia!");
+        alert("Cidade não encontrada!");
         return;
     }
 
     return data;
 };
 
-// Função para exibir os dados na tela
 const showWeatherData = async (city) => {
     const data = await getWeatherData(city);
 
@@ -38,27 +36,35 @@ const showWeatherData = async (city) => {
     humidityElement.innerText = data.main.humidity;
     windElement.innerText = data.wind.speed;
 
-    // Atualiza o ícone dinâmico
     const iconCode = data.weather[0].icon;
-    weatherIconElement.setAttribute("src", `http://openweathermap.org{iconCode}@2x.png`);
+    weatherIconElement.setAttribute("src", `https://openweathermap.org{iconCode}@2x.png`);
 
-    // Mostra o container com as informações
+    // --- MUDANÇA DE FUNDO DINÂMICA ---
+    const mainWeather = data.weather[0].main.toLowerCase();
+    document.body.className = ""; // Limpa classes anteriores
+
+    if (mainWeather.includes("cloud")) {
+        document.body.classList.add("clouds-bg");
+    } else if (mainWeather.includes("rain") || mainWeather.includes("drizzle")) {
+        document.body.classList.add("rain-bg");
+    } else if (mainWeather.includes("clear")) {
+        document.body.classList.add("clear-bg");
+    } else {
+        document.body.classList.add("default-bg");
+    }
+
     weatherContainer.classList.remove("hidden");
 };
 
-// Evento de clique no botão
 searchBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const city = cityInput.value;
-    if (city) {
-        showWeatherData(city);
-    }
+    if (city) showWeatherData(city);
 });
 
-// Evento de apertar a tecla "Enter"
 cityInput.addEventListener("keyup", (e) => {
     if (e.code === "Enter") {
         const city = e.target.value;
-        showWeatherData(city);
+        if (city) showWeatherData(city);
     }
 });
