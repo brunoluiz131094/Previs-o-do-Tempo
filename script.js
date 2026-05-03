@@ -12,7 +12,7 @@ const windElement = document.querySelector("#wind");
 const weatherContainer = document.querySelector("#weather-info");
 
 const getWeatherData = async (city) => {
-    const apiWeatherURL = `https://openweathermap.org{city}&units=metric&appid=${apiKey}&lang=pt_br`;
+    const apiWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}&lang=pt_br`;
 
     const res = await fetch(apiWeatherURL);
     const data = await res.json();
@@ -37,11 +37,10 @@ const showWeatherData = async (city) => {
     windElement.innerText = data.wind.speed;
 
     const iconCode = data.weather[0].icon;
-    weatherIconElement.setAttribute("src", `https://openweathermap.org{iconCode}@2x.png`);
+    weatherIconElement.setAttribute("src", `https://openweathermap.org/img/wn/${iconCode}@2x.png`);
 
-    // --- MUDANÇA DE FUNDO DINÂMICA ---
     const mainWeather = data.weather[0].main.toLowerCase();
-    document.body.className = ""; // Limpa classes anteriores
+    document.body.className = "";
 
     if (mainWeather.includes("cloud")) {
         document.body.classList.add("clouds-bg");
