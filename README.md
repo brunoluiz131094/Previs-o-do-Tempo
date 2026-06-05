@@ -6,7 +6,8 @@ Aplicação web que exibe as condições climáticas atuais de qualquer cidade d
 
 ## 🚀 Demonstração
 
-><<img width="1366" height="728" alt="image" src="https://github.com/user-attachments/assets/fa5ff458-f563-48c7-9791-70294a2bcd73" />
+><****<img width="1366" height="728" alt="image" src="https://github.com/user-attachments/assets/bb0c036e-3cda-41e1-b129-22929ac1d07e" />
+
 
 
 
